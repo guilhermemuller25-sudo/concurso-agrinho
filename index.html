@@ -3,15 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AgroEvolução | Sustentabilidade e Produção</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+    <title>Agrinho 2026 - Agro Forte, Futuro Sustentável</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-        body {
-            background-color: #f7f9f6;
-            color: #333;
+    <div class="container">
+        <header>
+            <button id="btn-dark-mode">🌙 Modo Escuro</button>
+            <div class="logo-agrinho">🌱 Projeto Agrinho 2026</div>
+            <h1>Agro Forte, Futuro Sustentável</h1>
+            <p>O equilíbrio entre produção e meio ambiente</p>
+        </header>
+
+        <section class="secao-artigos">
+            <h2>📰 Artigos em Destaque</h2>
+            <div class="grid-artigos">
+                
+                <article class="card-artigo">
+                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad451?auto=format&fit=crop&w=600&q=80" alt="Trator com tecnologia de precisão no campo" class="imagem-artigo">
+                    <div class="conteudo-artigo">
+                        <span class="tag tecnologia">Tecnologia</span>
+                        <h3>O papel dos Drones e da IA no Campo</h3>
+                        <p>A tecnologia de precisão permite monitorar lavouras em tempo real, aplicando água e nutrientes apenas onde é necessário. Isso evita o desperdício e protege o solo.</p>
+                    </div>
+                </article>
+
+                <article class="card-artigo">
+                    <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=600&q=80" alt="Plantação jovem com árvores ao fundo" class="imagem-artigo">
+                    <div class="conteudo-artigo">
+                        <span class="tag sustentabilidade">Sustentabilidade</span>
+                        <h3>Sistema ILPF: O que é?</h3>
+                        <p>A Integração Lavoura-Pecuária-Floresta combina diferentes atividades agrícolas na mesma área. O resultado? Terra mais fértil, sombra para o gado e produção o ano todo sem desmatar.</p>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="secao-jogo">
+            <div class="jogo-container">
+                <h2>🎮 Jogo Interativo: Desafio do Agro Sustentável</h2>
+                <p>Teste seus conhecimentos e descubra se você é um defensor do futuro do campo!</p>
+                
+                <div id="quiz-box">
+                    <h3 id="pergunta-texto">Carregando pergunta...</h3>
+                    <div id="opcoes-container">
+                        </div>
+                    <div id="resultado-jogo" class="escondido"></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter-box">
+            <h2>Fique por dentro do Agro Sustentável</h2>
+            <p>Receba novidades e dicas ambientais diretamente no seu e-mail.</p>
+            <form id="form-newsletter">
+                <input id="email-input" type="email" placeholder="Seu melhor e-mail" required>
+                <button type="submit">Assinar</button>
+            </form>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
