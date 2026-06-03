@@ -1,0 +1,265 @@
+/* style.css */
+
+/* 1. Variáveis de Cores (Facilita a manutenção e o Modo Escuro) */
+:root {
+    --bg-principal: #f9fbf9;
+    --bg-card: #ffffff;
+    --texto-principal: #2c3e50;
+    --texto-secundario: #5a6b5c;
+    --cor-primaria: #27ae60; /* Verde Agro */
+    --cor-secundaria: #8e44ad; /* Economia */
+    --cor-destaque: #d35400; /* Tecnologia */
+    --borda: #e2e8f0;
+    --shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* Transição suave ao mudar para o modo escuro */
+body {
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* 2. Cores para o Modo Escuro (Ativado via JS) */
+body.dark-theme {
+    --bg-principal: #121814;
+    --bg-card: #1e2520;
+    --texto-principal: #ecf0f1;
+    --texto-secundario: #bdc3c7;
+    --borda: #2c3e50;
+    --shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* 3. Reset e Estilos Gerais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--bg-principal);
+    color: var(--texto-principal);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 4. Cabeçalho (Header) */
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background: linear-gradient(135deg, #1e4620, #27ae60);
+    color: white;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-style: italic;
+    opacity: 0.9;
+}
+
+#btn-dark-mode {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+
+#btn-dark-mode:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* 5. Barra de Filtros */
+.filtros-nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn-filtro {
+    background-color: var(--bg-card);
+    color: var(--texto-principal);
+    border: 2px solid var(--borda);
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-filtro:hover, .btn-filtro.ativo {
+    background-color: var(--cor-primaria);
+    color: white;
+    border-color: var(--cor-primaria);
+}
+
+/* 6. Grid e Cards de Notícias */
+#container-noticias {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+    margin-bottom: 40px;
+}
+
+.card-noticia {
+    background-color: var(--bg-card);
+    border: 1px solid var(--borda);
+    border-radius: 8px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px var(--shadow);
+    transition: transform 0.2s;
+}
+
+.card-noticia:hover {
+    transform: translateY(-5px);
+}
+
+.card-noticia h3 {
+    font-size: 1.3rem;
+    margin: 12px 0;
+    color: var(--texto-principal);
+}
+
+.card-noticia p {
+    color: var(--texto-secundario);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+/* Customização das Tags de Categoria */
+.tag-categoria {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 4px;
+    color: white;
+}
+
+/* Cores dinâmicas para as tags */
+.tag-categoria:contains("SUSTENTABILIDADE"), 
+[data-categoria="sustentabilidade"] { background-color: var(--cor-primaria); }
+.tag-categoria:contains("TECNOLOGIA") { background-color: var(--cor-destaque); }
+.tag-categoria:contains("ECONOMIA") { background-color: var(--cor-secundaria); }
+
+.meta-noticia {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    border-top: 1px solid var(--borda);
+    padding-top: 15px;
+}
+
+.meta-noticia .data {
+    color: var(--texto-secundario);
+}
+
+.btn-ler-mais {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.btn-ler-mais:hover {
+    text-decoration: underline;
+}
+
+/* Mensagem de erro/vazio */
+.sem-noticias {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+    color: var(--texto-secundario);
+    font-style: italic;
+}
+
+/* 7. Seção Newsletter */
+.newsletter-box {
+    background-color: var(--bg-card);
+    border: 1px solid var(--borda);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.newsletter-box h2 {
+    margin-bottom: 10px;
+}
+
+.newsletter-box p {
+    color: var(--texto-secundario);
+    margin-bottom: 20px;
+}
+
+#form-newsletter {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#email-input {
+    flex: 1;
+    padding: 12px 20px;
+    border: 2px solid var(--borda);
+    border-radius: 25px;
+    background-color: var(--bg-principal);
+    color: var(--texto-principal);
+    outline: none;
+}
+
+#form-newsletter button {
+    background-color: var(--cor-primaria);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s;
+}
+
+#form-newsletter button:hover {
+    background-color: #1e8449;
+}
+
+/* 8. Responsividade (Telas menores) */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+    
+    #form-newsletter {
+        flex-direction: column;
+    }
+    
+    #email-input, #form-newsletter button {
+        width: 100%;
+    }
+}
