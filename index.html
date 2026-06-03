@@ -3,68 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agrinho 2026 - Agro Forte, Futuro Sustentável</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+    <title>Agrinho - Agro Forte, Futuro Sustentável</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        :root {
+            --bg-principal: #f4f7f4;
+            --bg-card: #ffffff;
+            --texto-principal: #2c3e50;
+            --texto-secundario: #556b2f;
+            --cor-primaria: #27ae60; 
+            --cor-jogo: #2980b9;
+            --borda: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.08);
+        }
 
-    <div class="container">
-        <header>
-            <button id="btn-dark-mode">🌙 Modo Escuro</button>
-            <div class="logo-agrinho">🌱 Projeto Agrinho 2026</div>
-            <h1>Agro Forte, Futuro Sustentável</h1>
-            <p>O equilíbrio entre produção e meio ambiente</p>
-        </header>
+        body {
+            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-        <section class="secao-artigos">
-            <h2>📰 Artigos em Destaque</h2>
-            <div class="grid-artigos">
-                
-                <article class="card-artigo">
-                    <img src="https://images.unsplash.com/photo-1625246333195-78d9c38ad451?auto=format&fit=crop&w=600&q=80" alt="Trator com tecnologia de precisão no campo" class="imagem-artigo">
-                    <div class="conteudo-artigo">
-                        <span class="tag tecnologia">Tecnologia</span>
-                        <h3>O papel dos Drones e da IA no Campo</h3>
-                        <p>A tecnologia de precisão permite monitorar lavouras em tempo real, aplicando água e nutrientes apenas onde é necessário. Isso evita o desperdício e protege o solo.</p>
-                    </div>
-                </article>
+        body.dark-theme {
+            --bg-principal: #141915;
+            --bg-card: #1f2621;
+            --texto-principal: #ecf0f1;
+            --texto-secundario: #a9dfbf;
+            --borda: #2c3e50;
+            --shadow: rgba(0, 0, 0, 0.4);
+        }
 
-                <article class="card-artigo">
-                    <img src="https://images.unsplash.com/photo-1592417817098-8f3d6eb19675?auto=format&fit=crop&w=600&q=80" alt="Plantação jovem com árvores ao fundo" class="imagem-artigo">
-                    <div class="conteudo-artigo">
-                        <span class="tag sustentabilidade">Sustentabilidade</span>
-                        <h3>Sistema ILPF: O que é?</h3>
-                        <p>A Integração Lavoura-Pecuária-Floresta combina diferentes atividades agrícolas na mesma área. O resultado? Terra mais fértil, sombra para o gado e produção o ano todo sem desmatar.</p>
-                    </div>
-                </article>
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
 
-            </div>
-        </section>
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #1b4d3e, #27ae60);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
 
-        <section class="secao-jogo">
-            <div class="jogo-container">
-                <h2>🎮 Jogo Interativo: Desafio do Agro Sustentável</h2>
-                <p>Teste seus conhecimentos e descubra se você é um defensor do futuro do campo!</p>
-                
-                <div id="quiz-box">
-                    <h3 id="pergunta-texto">Carregando pergunta...</h3>
-                    <div id="opcoes-container">
-                        </div>
-                    <div id="resultado-jogo" class="escondido"></div>
-                </div>
-            </div>
-        </section>
+        header h1 { font-size: 2.4rem; margin: 10px 0; }
+        header p { font-style: italic; opacity: 0.9; margin: 0; }
+        .logo-agrinho { font-weight: bold; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; }
 
-        <section class="newsletter-box">
-            <h2>Fique por dentro do Agro Sustentável</h2>
-            <p>Receba novidades e dicas ambientais diretamente no seu e-mail.</p>
-            <form id="form-newsletter">
-                <input id="email-input" type="email" placeholder="Seu melhor e-mail" required>
-                <button type="submit">Assinar</button>
-            </form>
-        </section>
-    </div>
+        #btn-dark-mode {
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(255, 255, 255, 0.2); border: none; color: white;
+            padding: 8px 15px; border-radius: 20px; cursor: pointer; transition: 0.2s;
+        }
+        #btn-dark-mode:hover { background: rgba(255, 255, 255, 0.3); }
 
-    <script src="script.js"></script>
-</body>
-</html>
+        .secao-artigos h2, .secao-jogo h2 {
+            margin: 0 0 20px 0;
+            color: var(--texto-principal);
+            border-left: 5px solid var(--cor-primaria);
+            padding-left: 10px;
+        }
+
+        .grid-artigos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card-artigo {
+            background-color: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px var(--shadow);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .imagem-artigo {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .conteudo-artigo { padding: 20px; }
+        .conteudo-artigo h3 { margin: 10px 0; font-size: 1.3rem; }
+        .conteudo-artigo p { color: var(--texto-secundario); font-size: 0.95rem; margin: 0; }
+
+        .tag {
+            font-size: 0.75rem; font-weight: bold; color: white;
+            padding: 4px 10px; border-radius: 20px; display: inline-block;
+        }
+        .tag.tecnologia { background-color: #e67e22; }
+        .tag.sustentabilidade { background-color: var(--cor-primaria); }
+
+        .secao-jogo { margin-bottom: 50px; }
+        .jogo-container {
+            background-color: var(--bg-card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow);
+            border: 2px solid var(--borda);
+        }
+
+        #quiz-box { margin-top: 25px; }
+        #pergunta-texto { margin: 0 0 20px 0; font-size: 1.25rem; }
+
+        #opcoes-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        .btn-opcao {
+            background-color: var(--bg-principal);
+            color: var(--texto-principal);
+            border: 2px solid var(--borda);
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        .btn-opcao:hover {
+            background-color: var(--cor-jogo);
+            color: white;
+            border-color: var(--cor-jogo);
+        }
+
+        #resultado-jogo {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .acertou { background-color: #d4edda; color: #155724; }
+        .errou { background-color: #f8d7da; color: #721c24; }
+        .escondido { display: none; }
+
+        .newsletter-box {
+            background-color: var(--bg-card);
+            border: 1px solid var(--borda);
+            padding: 35px; border-radius: 12px; text-align: center;
+            box-shadow: 0 4px 10px var(--shadow);
+        }
+        .newsletter-box h2 { margin: 0 0 10px 0; }
+        .newsletter-box p { margin: 0; color: var(--texto-sec
