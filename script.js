@@ -1,97 +1,102 @@
 // script.js
 
-// 1. Dados fictícios das notícias (Simulando um banco de dados ou API)
-const noticias = [
+// Banco de dados de perguntas do Jogo do Agrinho
+const perguntasQuiz = [
     {
-        id: 1,
-        titulo: "Tecnologia de precisão reduz uso de defensivos em 40% na safra atual",
-        resumo: "Produtores adotam IA e drones para aplicar insumos apenas onde é necessário, protegendo o solo e os lençóis freáticos.",
-        categoria: "tecnologia",
-        data: "03/06/2026"
+        pergunta: "Qual das alternativas abaixo é um exemplo de prática sustentável no agro?",
+        opcoes: [
+            "A) Desmatar áreas ciliares para aumentar o pasto.",
+            "B) Uso de drones para aplicar insumos apenas onde há necessidade.",
+            "C) Queimar a palha da cana para limpar o terreno rapidamente.",
+            "D) Utilizar água sem controle nos sistemas de irrigação."
+        ],
+        correta: 1 // Corresponde à alternativa B
     },
     {
-        id: 2,
-        titulo: "Crédito Verde: Bancos liberam R$ 5 bilhões para propriedades sustentáveis",
-        resumo: "Linhas de financiamento facilitadas estimulam fazendeiros a recuperar áreas degradadas e adotar o plantio direto.",
-        categoria: "economia",
-        data: "02/06/2026"
-    },
-    {
-        id: 3,
-        titulo: "Como a Integração Lavoura-Pecuária-Floresta (ILPF) está mudando o cenário nacional",
-        resumo: "O sistema que une produção e conservação ambiental mostra que é possível dobrar a produtividade sem desmatar.",
-        categoria: "sustentabilidade",
-        data: "31/05/2026"
-    },
-    {
-        id: 4,
-        titulo: "Uso de bioinsumos cresce e se torna o principal aliado do produtor moderno",
-        resumo: "Defensivos biológicos ganham espaço no mercado brasileiro, reduzindo a pegada de carbono do setor de grãos.",
-        categoria: "tecnologia",
-        data: "29/05/2026"
+        pergunta: "O que significa a sigla ILPF na agricultura moderna?",
+        opcoes: [
+            "A) Inovação de Lavouras Pró-Faturamento.",
+            "B) Irrigação de Lavouras com Plantas Flutuantes.",
+            "C) Integração Lavoura-Pecuária-Floresta.",
+            "D) Indústria de Limpeza de Produtos Fitossanitários."
+        ],
+        correta: 2 // Corresponde à alternativa C
     }
 ];
 
-// 2. Inicialização do sistema quando o DOM estiver carregado
+let perguntaAtualIndex = 0;
+
 document.addEventListener("DOMContentLoaded", () => {
-    renderizarNoticias(noticias);
-    configurarFiltros();
-    configurarNewsletter();
     configurarModoEscuro();
+    configurarNewsletter();
+    carregarPergunta(perguntaAtualIndex);
 });
 
-// 3. Função para renderizar as notícias na tela
-function renderizarNoticias(listaDeNoticias) {
-    const container = document.getElementById("container-noticias");
-    if (!container) return;
+// Função para gerar o jogo na tela
+function carregarPergunta(index) {
+    const perguntaTexto = document.getElementById("pergunta-texto");
+    const opcoesContainer = document.getElementById("opcoes-container");
+    const resultadoBox = document.getElementById("resultado-jogo");
 
-    container.innerHTML = ""; // Limpa o container
+    if (!perguntaTexto || !opcoesContainer) return;
 
-    if (listaDeNoticias.length === 0) {
-        container.innerHTML = "<p class='sem-noticias'>Nenhuma notícia encontrada para esta categoria.</p>";
+    // Se as perguntas acabarem
+    if (index >= perguntasQuiz.length) {
+        perguntaTexto.textContent = "🏆 Parabéns! Você concluiu o Desafio do Agrinho!";
+        opcoesContainer.innerHTML = "";
+        resultadoBox.className = "acertou";
+        resultadoBox.textContent = "Compartilhe seu aprendizado e ajude a construir um futuro sustentável!";
         return;
     }
 
-    listaDeNoticias.forEach(noticia => {
-        const card = document.createElement("article");
-        card.classList.add("card-noticia");
+    const dadosPergunta = perguntasQuiz[index];
+    perguntaTexto.textContent = dadosPergunta.pergunta;
+    opcoesContainer.innerHTML = "";
+    resultadoBox.className = "escondido"; // Esconde o resultado da pergunta anterior
+
+    // Cria os botões para cada alternativa
+    dadosPergunta.opcoes.forEach((opcao, idx) => {
+        const botao = document.createElement("button");
+        botao.classList.add("btn-opcao");
+        botao.textContent = opacity = opcao;
         
-        card.innerHTML = `
-            <span class="tag-categoria">${noticia.categoria.toUpperCase()}</span>
-            <h3>${noticia.titulo}</h3>
-            <p>${noticia.resumo}</p>
-            <div class="meta-noticia">
-                <span class="data">${noticia.data}</span>
-                <a href="#" class="btn-ler-mais">Ler matéria completa →</a>
-            </div>
-        `;
-        container.appendChild(card);
+        botao.addEventListener("click", () => verificarResposta(idx, dadosPergunta.correta));
+        opcoesContainer.appendChild(botao);
     });
 }
 
-// 4. Função de filtragem por categoria
-function configurarFiltros() {
-    const botoesFiltro = document.querySelectorAll(".btn-filtro");
+// Verifica se o usuário clicou no botão certo
+function verificarResposta(selecionada, correta) {
+    const resultadoBox = document.getElementById("resultado-jogo");
+    resultadoBox.classList.remove("escondido");
 
-    botoesFiltro.forEach(botao => {
-        botao.addEventListener("click", (e) => {
-            // Remove classe ativa de todos e adiciona no clicado
-            botoesFiltro.forEach(b => b.classList.remove("ativo"));
-            e.target.classList.add("ativo");
+    if (selecionada === correta) {
+        resultadoBox.className = "acertou";
+        resultadoBox.textContent = "Resposta Correta! 🌱 Avançando...";
+        
+        // Espera 2 segundos e vai para a próxima pergunta
+        perguntaAtualIndex++;
+        setTimeout(() => {
+            carregarPergunta(perguntaAtualIndex);
+        }, 2000);
+    } else {
+        resultadoBox.className = "errou";
+        resultadoBox.textContent = "Ops, resposta incorreta! Tente analisar o texto do artigo acima e tente novamente.";
+    }
+}
 
-            const categoriaSelecionada = e.target.getAttribute("data-categoria");
+// Configuração do Modo Escuro
+function configurarModoEscuro() {
+    const btnToggle = document.getElementById("btn-dark-mode");
+    if (!btnToggle) return;
 
-            if (categoriaSelecionada === "todas") {
-                renderizarNoticias(noticias);
-            } else {
-                const noticiasFiltradas = noticias.filter(n => n.categoria === categoriaSelecionada);
-                renderizarNoticias(noticiasFiltradas);
-            }
-        });
+    btnToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-theme");
+        btnToggle.textContent = document.body.classList.contains("dark-theme") ? "☀️ Modo Claro" : "🌙 Modo Escuro";
     });
 }
 
-// 5. Simulação de inscrição na Newsletter
+// Configuração da Newsletter
 function configurarNewsletter() {
     const form = document.getElementById("form-newsletter");
     if (!form) return;
@@ -99,27 +104,9 @@ function configurarNewsletter() {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
         const emailInput = document.getElementById("email-input");
-        
         if (emailInput && emailInput.value) {
-            alert(`Obrigado! O email ${emailInput.value} foi cadastrado para receber nossas análises sobre o Agro Sustentável.`);
-            emailInput.value = ""; // Limpa o campo
-        }
-    });
-}
-
-// 6. Funcionalidade extra: Alternador de Modo Escuro (Dark Mode)
-function configurarModoEscuro() {
-    const btnToggle = document.getElementById("btn-dark-mode");
-    if (!btnToggle) return;
-
-    btnToggle.addEventListener("click", () => {
-        document.body.classList.toggle("dark-theme");
-        
-        // Altera o texto do botão conforme o modo
-        if (document.body.classList.contains("dark-theme")) {
-            btnToggle.textContent = "☀️ Modo Claro";
-        } else {
-            btnToggle.textContent = "🌙 Modo Escuro";
+            alert(`Obrigado! O e-mail ${emailInput.value} foi cadastrado.`);
+            emailInput.value = "";
         }
     });
 }
